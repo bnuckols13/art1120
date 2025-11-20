@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Expressive Therapies Continuum - Process & Regulation</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-teal: #5EEAD4;
+            --deep-teal: #14B8A6;
+            --sage-green: #87A878;
+            --soft-sage: #A8C09A;
+            --soft-purple: #C084FC;
+            --warm-rose: #FDA4AF;
+            --calm-blue: #93C5FD;
+            --midnight: #1E293B;
+            --slate: #475569;
+            --pearl: #F8FAFC;
+            --cream: #FFF8E7;
+            --gradient-nature: linear-gradient(135deg, #5EEAD4 0%, #93C5FD 100%);
+            --gradient-warm: linear-gradient(135deg, #FDA4AF 0%, #C084FC 100%);
+            --gradient-earth: linear-gradient(135deg, #87A878 0%, #7BA7BC 100%);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #87A87815 0%, #5EEAD415 100%);
+            min-height: 100vh;
+            color: var(--midnight);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Floating background elements */
+        .bg-circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(60px);
+            opacity: 0.3;
+            animation: float 20s infinite ease-in-out;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-circle1 {
+            width: 350px;
+            height: 350px;
+            background: var(--sage-green);
+            top: -100px;
+            right: -100px;
+        }
+
+        .bg-circle2 {
+            width: 400px;
+            height: 400px;
+            background: var(--soft-purple);
+            bottom: -150px;
+            left: -150px;
+            animation-delay: -5s;
+        }
+
+        .bg-circle3 {
+            width: 280px;
+            height: 280px;
+            background: var(--primary-teal);
+            top: 50%;
+            right: 15%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: slideDown 0.8s ease;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            background: var(--gradient-earth);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+            font-weight: 800;
+        }
+
+        .subtitle {
+            color: var(--slate);
+            font-size: 1.1rem;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        .nav-pills {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-pill {
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            background: white;
+            border: 2px solid transparent;
+            color: var(--slate);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .nav-pill:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+        }
+
+        .nav-pill.active {
+            background: var(--gradient-earth);
+            color: white;
+            border-color: transparent;
+        }
+
+        /* Pages */
+        .page {
+            display: none;
+            animation: fadeIn 0.6s ease;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Cards */
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-earth);
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.12);
+        }
+
+        .card h2 {
+            color: var(--midnight);
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .icon {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-earth);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+        }
+
+        /* Quote Section */
+        .quote-box {
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.1) 0%, rgba(94, 234, 212, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            border-left: 4px solid var(--sage-green);
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--slate);
+            line-height: 1.8;
+        }
+
+        .quote-author {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--deep-teal);
+            font-style: normal;
+        }
+
+        /* Meditation Section */
+        .meditation-box {
+            background: linear-gradient(135deg, rgba(147, 197, 253, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%);
+            padding: 2rem;
+            border-radius: 20px;
+            margin: 2rem 0;
+        }
+
+        .meditation-box h3 {
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+
+        .meditation-box p {
+            color: var(--slate);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .breathing-guide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 2rem 0;
+        }
+
+        .breathe-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: var(--gradient-nature);
+            animation: breathe 8s infinite ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            box-shadow: 0 10px 40px rgba(94, 234, 212, 0.3);
+        }
+
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 0.7; }
+            25% { transform: scale(1.3); opacity: 1; }
+            50% { transform: scale(1); opacity: 0.7; }
+        }
+
+        /* Concept Grid */
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .concept-card {
+            background: linear-gradient(135deg, var(--pearl) 0%, white 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid rgba(135, 168, 120, 0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .concept-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(135, 168, 120, 0.2);
+            border-color: var(--sage-green);
+        }
+
+        .concept-card h3 {
+            color: var(--deep-teal);
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .concept-card p {
+            color: var(--slate);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-top: 0.5rem;
+        }
+
+        .concept-card ul {
+            margin-top: 1rem;
+            margin-left: 1.5rem;
+            color: var(--slate);
+            line-height: 2;
+        }
+
+        .concept-card strong {
+            display: inline-block;
+            margin-top: 0.75rem;
+        }
+
+        .concept-card strong:first-child {
+            margin-top: 0;
+        }
+
+        /* ETC Level Badge */
+        .etc-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--gradient-warm);
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        /* Station Grid */
+        .station-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .station-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid var(--sage-green);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .station-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        .station-card.selected {
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.1) 0%, rgba(94, 234, 212, 0.1) 100%);
+            border-top-color: var(--deep-teal);
+        }
+
+        .station-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .station-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-earth);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .station-card h3 {
+            color: var(--midnight);
+            font-size: 1.3rem;
+            margin: 0;
+        }
+
+        .station-subtitle {
+            color: var(--slate);
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-bottom: 1rem;
+        }
+
+        .station-questions {
+            background: rgba(135, 168, 120, 0.1);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            color: var(--slate);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .station-questions strong {
+            color: var(--deep-teal);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Pass Option */
+        .pass-option {
+            background: linear-gradient(135deg, rgba(253, 164, 175, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border-left: 4px solid var(--warm-rose);
+        }
+
+        .pass-option p {
+            color: var(--slate);
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .pass-option strong {
+            color: var(--deep-teal);
+        }
+
+        /* Integration Section */
+        .reflection-prompts {
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.05) 0%, rgba(147, 197, 253, 0.05) 100%);
+            padding: 2rem;
+            border-radius: 16px;
+            margin-top: 2rem;
+        }
+
+        .reflection-prompts h3 {
+            color: var(--deep-teal);
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .reflection-prompt {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+            border-left: 3px solid var(--sage-green);
+        }
+
+        .reflection-prompt h4 {
+            color: var(--midnight);
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .reflection-prompt p {
+            color: var(--slate);
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        .reflection-prompt textarea {
+            width: 100%;
+            min-height: 100px;
+            padding: 1rem;
+            border: 2px solid rgba(135, 168, 120, 0.3);
+            border-radius: 12px;
+            font-family: inherit;
+            font-size: 1rem;
+            margin-top: 0.5rem;
+            resize: vertical;
+            transition: all 0.3s ease;
+        }
+
+        .reflection-prompt textarea:focus {
+            outline: none;
+            border-color: var(--sage-green);
+            box-shadow: 0 0 0 3px rgba(135, 168, 120, 0.1);
+        }
+
+        /* Process Reminder Box */
+        .process-box {
+            background: linear-gradient(135deg, rgba(253, 164, 175, 0.15) 0%, rgba(192, 132, 252, 0.15) 100%);
+            padding: 1.5rem;
+            border-radius: 16px;
+            margin: 2rem 0;
+            border: 2px solid var(--warm-rose);
+        }
+
+        .process-box h4 {
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .process-box p {
+            color: var(--slate);
+            line-height: 1.7;
+            margin-bottom: 0.75rem;
+        }
+
+        /* Continuum Visual */
+        .continuum-visual {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(135, 168, 120, 0.1) 0%, rgba(94, 234, 212, 0.1) 100%);
+            border-radius: 16px;
+            position: relative;
+        }
+
+        .continuum-level {
+            flex: 1;
+            text-align: center;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 12px;
+            margin: 0 0.5rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .continuum-level:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+        }
+
+        .continuum-level h4 {
+            color: var(--deep-teal);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .continuum-level p {
+            color: var(--slate);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .continuum-arrow {
+            font-size: 2rem;
+            color: var(--sage-green);
+        }
+
+        /* Resource Box */
+        .resource-box {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 16px;
+            border: 2px solid var(--primary-teal);
+            margin: 2rem 0;
+        }
+
+        .resource-box h4 {
+            color: var(--deep-teal);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .resource-box ul {
+            margin-left: 1.5rem;
+            color: var(--slate);
+            line-height: 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            .container { padding: 1rem; }
+            .card { padding: 1.5rem; }
+            .nav-pills { flex-direction: column; align-items: stretch; }
+            .station-grid { grid-template-columns: 1fr; }
+            .continuum-visual { flex-direction: column; }
+            .continuum-level { margin: 0.5rem 0; }
+            .continuum-arrow { transform: rotate(90deg); margin: 0.5rem 0; }
+        }
+
+        /* Selection indicator */
+        .station-card::after {
+            content: '✓ Selected';
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: var(--deep-teal);
+            color: white;
+            padding: 0.3rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .station-card.selected::after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Background Elements -->
+    <div class="bg-circle bg-circle1"></div>
+    <div class="bg-circle bg-circle2"></div>
+    <div class="bg-circle bg-circle3"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>∞ The Expressive Therapies Continuum</h1>
+            <p class="subtitle">Journey Through Sensation, Emotion, and Meaning</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="nav-pills">
+            <button class="nav-pill active" onclick="showPage(0)">◯ Ground & Open</button>
+            <button class="nav-pill" onclick="showPage(1)">⊕ Learn the Continuum</button>
+            <button class="nav-pill" onclick="showPage(2)">✧ Explore & Create</button>
+            <button class="nav-pill" onclick="showPage(3)">★ Integrate & Reflect</button>
+        </div>
+
+        <!-- Page 1: Opening & Meditation -->
+        <div class="page active" id="page1">
+            <div class="card">
+                <h2>
+                    <div class="icon">⚘</div>
+                    Welcome & Grounding
+                </h2>
+                
+                <div class="quote-box">
+                    "The body is the shore on the ocean of being."
+                    <div class="quote-author">— Sufi Saying</div>
+                </div>
+
+                <div class="meditation-box">
+                    <h3>◯ Opening Meditation: Sensing Your Way In</h3>
+                    <p>
+                        Find a comfortable position. Before we think, before we analyze, before we make meaning—
+                        we sense. We feel. We move.
+                    </p>
+                    <p>
+                        Place your hands on your heart. Notice the rise and fall of your breath. 
+                        Feel the temperature of your skin. The weight of your body. The texture of what you're touching.
+                    </p>
+
+                    <div class="breathing-guide">
+                        <div class="breathe-circle">Breathe</div>
+                    </div>
+
+                    <p>
+                        Today we explore different ways of creating—from pure sensation and movement, 
+                        through form and feeling, to symbol and meaning. There is no hierarchy. Each level 
+                        serves a purpose. Each offers healing.
+                    </p>
+                    <p>
+                        <strong>Remember:</strong> This is about the journey, not the destination. The process, not perfection. 
+                        What you make today matters less than how you feel making it.
+                    </p>
+                </div>
+
+                <div class="process-box">
+                    <h4>◈ Process Over Perfection</h4>
+                    <p><strong>Today is not about making "good art."</strong> It's about exploring different ways your nervous system processes experience through creativity.</p>
+                    <p>Some levels will feel easier. Some will challenge you. Both are information. Both are welcome.</p>
+                    <p>Your body knows what it needs. Trust the process.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Psychoeducation -->
+        <div class="page" id="page2">
+            <div class="card">
+                <h2>
+                    <div class="icon">⊕</div>
+                    Understanding the Expressive Therapies Continuum
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 2rem; line-height: 1.7;">
+                    The ETC is a framework for understanding how we process experience through creative expression. 
+                    Different levels of the continuum serve different therapeutic and regulatory functions.
+                </p>
+
+                <div class="continuum-visual">
+                    <div class="continuum-level">
+                        <h4>Kinesthetic/Sensory</h4>
+                        <p>Body & Sensation</p>
+                    </div>
+                    <div class="continuum-arrow">→</div>
+                    <div class="continuum-level">
+                        <h4>Perceptual/Affective</h4>
+                        <p>Form & Feeling</p>
+                    </div>
+                    <div class="continuum-arrow">→</div>
+                    <div class="continuum-level">
+                        <h4>Cognitive/Symbolic</h4>
+                        <p>Thought & Meaning</p>
+                    </div>
+                </div>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <div class="etc-badge">K/S Level</div>
+                        <h3>◈ Kinesthetic/Sensory</h3>
+                        <p><strong>What it is:</strong> Movement-based and sensation-focused creative expression. Pure experience before language or form.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Feels like:</strong> Getting lost in motion, texture, rhythm. Body takes the lead.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Regulates:</strong> Discharges energy, grounds in present moment, engages proprioception</p>
+                        <p style="margin-top: 0.75rem;"><strong>Examples:</strong> Scribbling, finger painting, dancing while drawing, working with eyes closed</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="etc-badge">P/A Level</div>
+                        <h3>≋ Perceptual/Affective</h3>
+                        <p><strong>What it is:</strong> Creating recognizable forms while expressing emotions. Shape and feeling working together.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Feels like:</strong> Emotions flowing through color and shape. Noticing both what you make and how you feel.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Regulates:</strong> Externalizes emotions, creates safe distance, allows emotional expression</p>
+                        <p style="margin-top: 0.75rem;"><strong>Examples:</strong> Painting emotions as landscapes, creating mood collages, expressive self-portraits</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <div class="etc-badge">C/Sy Level</div>
+                        <h3>◉ Cognitive/Symbolic</h3>
+                        <p><strong>What it is:</strong> Using art to represent ideas, tell stories, create metaphors. Meaning-making through symbols.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Feels like:</strong> Understanding dawning. Patterns emerging. Stories taking shape.</p>
+                        <p style="margin-top: 0.75rem;"><strong>Regulates:</strong> Makes sense of experience, creates narrative coherence, integrates insights</p>
+                        <p style="margin-top: 0.75rem;"><strong>Examples:</strong> Visual metaphors, symbolic self-portraits, illustrated narratives, mandalas</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <div class="icon">◯</div>
+                    Why the Continuum Matters for Regulation
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 1.5rem; line-height: 1.7;">
+                    Different nervous system states call for different levels of creative expression. 
+                    The continuum gives us a map for meeting ourselves where we are.
+                </p>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>≈ When You're Overwhelmed (Hyperarousal)</h3>
+                        <p><strong>Drop down to K/S level:</strong> Large movements, physical materials, repetitive actions. Discharge activation through the body.</p>
+                        <p style="margin-top: 0.5rem;">Examples: Scribble intensely, pound clay, tear paper, paint with whole arm movements.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>○ When You're Shut Down (Hypoarousal)</h3>
+                        <p><strong>Stay at K/S level but gently:</strong> Sensory exploration, gentle touch, slow movements. Wake the body without overwhelming.</p>
+                        <p style="margin-top: 0.5rem;">Examples: Trace textures, layer soft colors, gentle mark-making, hold warm clay.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>◈ When You're Emotionally Flooded</h3>
+                        <p><strong>Move to P/A level:</strong> Give emotions form and color. Externalize to create distance and perspective.</p>
+                        <p style="margin-top: 0.5rem;">Examples: Paint your feelings as weather, create emotion landscapes, color mixing.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>⊕ When You're Ready to Make Meaning</h3>
+                        <p><strong>Move to C/Sy level:</strong> Create metaphors, tell stories, find patterns. Integrate experience into narrative.</p>
+                        <p style="margin-top: 0.5rem;">Examples: Create symbols for your journey, illustrate insights, map your growth.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>∞ When You're Integrated</h3>
+                        <p><strong>Flow between all levels:</strong> The Creative Level—synthesis of sensation, emotion, and meaning.</p>
+                        <p style="margin-top: 0.5rem;">This is the goal: flexible movement between all ways of processing.</p>
+                    </div>
+                </div>
+
+                <div class="process-box" style="margin-top: 2rem;">
+                    <h4>✧ Key Insight</h4>
+                    <p>There's no "best" level. Healing happens when you can move fluidly between levels based on what you need in the moment.</p>
+                    <p>Today you'll explore each level and notice which feels most accessible, which feels most challenging, and what that teaches you about your nervous system.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <div class="icon">◯</div>
+                    Window of Tolerance & The Continuum
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 2rem; line-height: 1.7;">
+                    Your window of tolerance—the zone where you can process experience without being overwhelmed or shutting down—
+                    determines which level of the continuum is accessible and helpful.
+                </p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <div style="display: inline-block; padding: 2rem; background: linear-gradient(135deg, rgba(253, 164, 175, 0.2) 0%, rgba(255, 255, 255, 0.5) 50%, rgba(147, 197, 253, 0.2) 100%); border-radius: 20px; max-width: 600px;">
+                        <div style="background: rgba(253, 164, 175, 0.3); padding: 1rem; border-radius: 12px; margin-bottom: 1rem;">
+                            <strong style="color: var(--midnight);">⚡ HYPERAROUSAL</strong>
+                            <p style="color: var(--slate); font-size: 0.9rem; margin-top: 0.5rem;">Overwhelmed, anxious, activated</p>
+                        </div>
+                        <div style="background: rgba(135, 168, 120, 0.3); padding: 1.5rem; border-radius: 12px; border: 3px solid var(--sage-green); margin-bottom: 1rem;">
+                            <strong style="color: var(--midnight);">◯ WINDOW OF TOLERANCE</strong>
+                            <p style="color: var(--slate); font-size: 0.9rem; margin-top: 0.5rem;">Regulated, present, able to process</p>
+                        </div>
+                        <div style="background: rgba(147, 197, 253, 0.3); padding: 1rem; border-radius: 12px;">
+                            <strong style="color: var(--midnight);">❄ HYPOAROUSAL</strong>
+                            <p style="color: var(--slate); font-size: 0.9rem; margin-top: 0.5rem;">Shut down, numb, disconnected</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>⚡ When Hyperaroused (Above Window)</h3>
+                        <p><strong>You need:</strong> K/S Level - Discharge & Ground</p>
+                        
+                        <p><strong>Why it works:</strong> Big movements, physical materials, and sensory engagement help discharge excess activation. Your body needs to MOVE before it can feel or think.</p>
+                        
+                        <p><strong>Try:</strong> Intense scribbling, pounding clay, vigorous movement, loud sounds, tearing paper</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>◯ When in Window (Regulated)</h3>
+                        <p><strong>You can access:</strong> All Levels Fluidly</p>
+                        
+                        <p><strong>Why it works:</strong> When regulated, you can move between sensation, emotion, and meaning naturally. This is where integration happens.</p>
+                        
+                        <p><strong>Try:</strong> Any level! Follow curiosity. Trust your creative flow.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>❄ When Hypoaroused (Below Window)</h3>
+                        <p><strong>You need:</strong> Gentle K/S Level - Awaken & Orient</p>
+                        
+                        <p><strong>Why it works:</strong> Gentle sensory input wakes the nervous system without overwhelming. Slow, soothing, grounding materials help you come back online.</p>
+                        
+                        <p><strong>Try:</strong> Soft textures, warm clay, gentle mark-making, slow rhythms, quiet sounds</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>◈ The Wisdom</h3>
+                        <p><strong>Start where you are:</strong> Don't try to access symbolic meaning when you're overwhelmed or shut down.</p>
+                        
+                        <p><strong>Use the continuum to regulate FIRST:</strong> K/S level helps you return to your window. Then P/A and C/Sy become accessible.</p>
+                        
+                        <p><strong>Remember:</strong> Regulation before insight.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <div class="icon">≋</div>
+                    The Iceberg: Verbal to Pre-verbal (You Can Use Either!)
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 2rem; line-height: 1.7;">
+                    The continuum works in BOTH directions. You can start with words and meaning, moving down into body. 
+                    OR start with sensation and body, moving up toward language. Both are valid healing pathways.
+                </p>
+
+                <div style="text-align: center; margin: 2rem 0;">
+                    <div style="display: inline-block; position: relative; max-width: 500px;">
+                        <!-- Above water - Verbal/Cognitive -->
+                        <div style="background: linear-gradient(180deg, rgba(147, 197, 253, 0.3) 0%, rgba(94, 234, 212, 0.2) 100%); padding: 2rem; border-radius: 20px 20px 0 0; border: 2px solid var(--calm-blue); border-bottom: none;">
+                            <p style="color: var(--midnight); font-size: 0.9rem; margin-bottom: 1rem; opacity: 0.7;">☁️ Above the Waterline: Conscious & Verbal</p>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                                <strong style="color: var(--deep-teal);">C/Sy Level</strong>
+                                <p style="color: var(--slate); font-size: 0.9rem; margin-top: 0.5rem;">Thoughts, words, symbols, stories, meaning</p>
+                            </div>
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px;">
+                                <strong style="color: var(--deep-teal);">P/A Level (Middle)</strong>
+                                <p style="color: var(--slate); font-size: 0.9rem; margin-top: 0.5rem;">Emotions, forms, recognizable feelings</p>
+                            </div>
+                        </div>
+                        
+                        <!-- Waterline -->
+                        <div style="height: 3px; background: linear-gradient(90deg, transparent 0%, var(--primary-teal) 20%, var(--primary-teal) 80%, transparent 100%); position: relative;">
+                            <span style="position: absolute; left: 50%; transform: translateX(-50%); background: white; padding: 0 1rem; color: var(--deep-teal); font-weight: 600; font-size: 0.85rem; top: -12px;">≈ Waterline ≈</span>
+                        </div>
+                        
+                        <!-- Below water - Pre-verbal/Somatic -->
+                        <div style="background: linear-gradient(180deg, rgba(94, 234, 212, 0.2) 0%, rgba(135, 168, 120, 0.4) 100%); padding: 2rem; border-radius: 0 0 20px 20px; border: 2px solid var(--sage-green); border-top: none;">
+                            <div style="background: white; padding: 1.5rem; border-radius: 12px; margin-bottom: 1rem;">
+                                <strong style="color: var(--deep-teal);">K/S Level</strong>
+                                <p style="color: var(--slate); font-size: 0.9rem; margin-top: 0.5rem;">Sensations, movements, impulses, body wisdom</p>
+                            </div>
+                            <p style="color: var(--midnight); font-size: 0.9rem; margin-top: 1rem; opacity: 0.7;">🌊 Below the Waterline: Pre-conscious & Somatic</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>↓ Top-Down Approach (Verbal to Pre-verbal)</h3>
+                        <p><strong>Start with:</strong> Thoughts, stories, words (C/Sy)</p>
+                        
+                        <p><strong>Move to:</strong> Emotions and forms (P/A)</p>
+                        
+                        <p><strong>End with:</strong> Body sensations and movement (K/S)</p>
+                        
+                        <p><strong>Good for:</strong> People who are comfortable with language, need to "think their way" into feeling, or tend to intellectualize</p>
+                        
+                        <p><em>Example: Write about anger → Paint it → Move it out of your body</em></p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>↑ Bottom-Up Approach (Pre-verbal to Verbal)</h3>
+                        <p><strong>Start with:</strong> Body sensations and movement (K/S)</p>
+                        
+                        <p><strong>Move to:</strong> Emotions and forms (P/A)</p>
+                        
+                        <p><strong>End with:</strong> Meaning and language (C/Sy)</p>
+                        
+                        <p><strong>Good for:</strong> Trauma processing, when words fail, accessing implicit memories, or when feeling disconnected from body</p>
+                        
+                        <p><em>Example: Dance tension → Paint the feeling → Write what it meant</em></p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>↔️ Bidirectional Healing</h3>
+                        <p><strong>The truth:</strong> Healing doesn't only happen one way</p>
+                        
+                        <p>Some days you need to think your way into your body. Other days you need to feel your way into language. Both paths lead to integration.</p>
+                        
+                        <p><strong>The continuum is a two-way street.</strong> Start wherever you can access, move in whatever direction serves healing.</p>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>◯ What Lives Below the Waterline</h3>
+                        <p><strong>Pre-verbal doesn't mean unimportant:</strong></p>
+                        
+                        <p>• Preverbal trauma and memory</p>
+                        <p>• Attachment patterns formed before language</p>
+                        <p>• Somatic wisdom and intuition</p>
+                        <p>• The body's "knowing" that can't be spoken</p>
+                        
+                        <p><em>Art gives voice to what lives beneath words.</em></p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(94, 234, 212, 0.1) 0%, rgba(135, 168, 120, 0.1) 100%); border-radius: 16px;">
+                    <p style="color: var(--deep-teal); font-weight: 600; margin-bottom: 0.5rem;">
+                        ∞ Integration Happens Both Ways
+                    </p>
+                    <p style="color: var(--slate); line-height: 1.7;">
+                        Sometimes we need to drop below the waterline to access what words can't reach. 
+                        Sometimes we need to surface and make meaning. The continuum honors both directions. 
+                        <strong>Trust which way your nervous system needs to move today.</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <div class="icon">⚘</div>
+                    Process vs. Product: What We're Really Doing Here
+                </h2>
+                
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>✗ Product-Focused</h3>
+                        <ul>
+                            <li>Worried about outcome</li>
+                            <li>Comparing to others</li>
+                            <li>Judging as "good" or "bad"</li>
+                            <li>Planning and controlling</li>
+                            <li>Anxiety about results</li>
+                        </ul>
+                    </div>
+
+                    <div class="concept-card">
+                        <h3>✓ Process-Focused</h3>
+                        <ul>
+                            <li>Curious about experience</li>
+                            <li>Noticing sensations and feelings</li>
+                            <li>Following what emerges</li>
+                            <li>Staying present with making</li>
+                            <li>Trust in exploration</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(94, 234, 212, 0.1) 0%, rgba(135, 168, 120, 0.1) 100%); border-radius: 16px;">
+                    <p style="color: var(--deep-teal); font-weight: 600; margin-bottom: 0.5rem;">
+                        ◉ The Therapeutic Power of Process
+                    </p>
+                    <p style="color: var(--slate); line-height: 1.7;">
+                        When we focus on process, we practice being present. We develop tolerance for uncertainty. 
+                        We learn to trust our bodies. We discover that we don't need to control everything to be okay.
+                    </p>
+                    <p style="color: var(--slate); line-height: 1.7; margin-top: 1rem;">
+                        <strong>This is nervous system healing.</strong>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Creative Stations -->
+        <div class="page" id="page3">
+            <div class="card">
+                <h2>
+                    <div class="icon">✧</div>
+                    Creative Exploration Stations
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 1.5rem; line-height: 1.7;">
+                    Each of our seven creative modalities invites you to explore ALL three levels of the continuum: 
+                    Kinesthetic/Sensory (body & sensation), Perceptual/Affective (form & feeling), and Cognitive/Symbolic (thought & meaning). 
+                    Choose the stations that call to you, and within each station, notice which level feels most natural or needed.
+                </p>
+
+                <div class="pass-option">
+                    <p>
+                        <strong>♡ Honor Your Process:</strong> You can skip stations, stay longer at some than others, 
+                        or return to the same level multiple times. Your pace and path are perfect.
+                    </p>
+                </div>
+
+                <div class="station-grid">
+                    <!-- Station 1: Visual Arts -->
+                    <div class="station-card" onclick="selectStation(this)">
+                        <div class="station-header">
+                            <div class="station-icon">✧</div>
+                            <div>
+                                <h3>Visual Arts</h3>
+                                <p class="station-subtitle">"Through Sensation to Symbol"</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--slate); line-height: 1.6;">
+                            Explore painting, drawing, collage, and mixed media through all levels of the continuum.
+                        </p>
+                        <div class="station-questions">
+                            <strong>K/S Level:</strong> Scribble, finger paint, work with eyes closed, smear and blend with whole arm movements
+                            <br><strong>P/A Level:</strong> Paint your emotions as weather, create color gradients of feelings, give shape to your inner landscape
+                            <br><strong>C/Sy Level:</strong> Create visual metaphors, symbolic self-portraits, illustrate your journey with imagery that carries meaning
+                            <p style="margin-top: 1rem;"><strong>Materials:</strong> Paint, pastels, markers, collage materials, canvas, paper</p>
+                        </div>
+                    </div>
+
+                    <!-- Station 2: Movement & Dance -->
+                    <div class="station-card" onclick="selectStation(this)">
+                        <div class="station-header">
+                            <div class="station-icon">◈</div>
+                            <div>
+                                <h3>Movement & Dance</h3>
+                                <p class="station-subtitle">"Embodied Expression"</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--slate); line-height: 1.6;">
+                            Use your body as the creative medium, exploring through all continuum levels.
+                        </p>
+                        <div class="station-questions">
+                            <strong>K/S Level:</strong> Pure movement exploration—shake, stretch, sway, stomp. Follow your body's impulses without choreography
+                            <br><strong>P/A Level:</strong> Dance your emotions, embody different feeling states, move from activation to calm
+                            <br><strong>C/Sy Level:</strong> Create gestures that symbolize your experience, choreograph a story of transformation
+                            <p style="margin-top: 1rem;"><strong>Notice:</strong> How does each level change your relationship to movement?</p>
+                        </div>
+                    </div>
+
+                    <!-- Station 3: Music & Sound -->
+                    <div class="station-card" onclick="selectStation(this)">
+                        <div class="station-header">
+                            <div class="station-icon">♪</div>
+                            <div>
+                                <h3>Music & Sound</h3>
+                                <p class="station-subtitle">"Sonic Landscapes"</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--slate); line-height: 1.6;">
+                            Explore rhythm, melody, and sound through sensory, emotional, and symbolic expression.
+                        </p>
+                        <div class="station-questions">
+                            <strong>K/S Level:</strong> Create rhythms with body percussion, experiment with instrument textures, improvise without melody
+                            <br><strong>P/A Level:</strong> Express emotions through tempo and dynamics, create soundscapes for different feeling states
+                            <br><strong>C/Sy Level:</strong> Compose a personal anthem, create musical metaphors for your journey, symbolic sound sequences
+                            <p style="margin-top: 1rem;"><strong>Materials:</strong> Drums, shakers, voice, found objects, recorded sounds</p>
+                        </div>
+                    </div>
+
+                    <!-- Station 4: Poetry & Writing -->
+                    <div class="station-card" onclick="selectStation(this)">
+                        <div class="station-header">
+                            <div class="station-icon">✎</div>
+                            <div>
+                                <h3>Poetry & Writing</h3>
+                                <p class="station-subtitle">"Words from Body to Meaning"</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--slate); line-height: 1.6;">
+                            Use language through all levels—from raw expression to crafted meaning.
+                        </p>
+                        <div class="station-questions">
+                            <strong>K/S Level:</strong> Automatic writing, stream of consciousness, write without editing or planning, sound poetry
+                            <br><strong>P/A Level:</strong> Name your emotions, write from feeling states, emotional landscapes in words
+                            <br><strong>C/Sy Level:</strong> Craft metaphors, create symbolic poetry, write your story with beginning/middle/end
+                            <p style="margin-top: 1rem;"><strong>Prompts:</strong> "My body is..." / "I feel..." / "The symbol for this moment is..."</p>
+                        </div>
+                    </div>
+
+                    <!-- Station 5: Drama & Role-Play -->
+                    <div class="station-card" onclick="selectStation(this)">
+                        <div class="station-header">
+                            <div class="station-icon">⚯</div>
+                            <div>
+                                <h3>Drama & Role-Play</h3>
+                                <p class="station-subtitle">"Embodied Story"</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--slate); line-height: 1.6;">
+                            Explore self and experience through performative expression at all continuum levels.
+                        </p>
+                        <div class="station-questions">
+                            <strong>K/S Level:</strong> Physical improvisation, mirroring exercises, embodying elements (earth, fire, water, air)
+                            <br><strong>P/A Level:</strong> Enact emotional scenes, dialogue between feeling states, express inner conflicts dramatically
+                            <br><strong>C/Sy Level:</strong> Create characters that represent parts of you, symbolic ritual enactments, hero's journey performance
+                            <p style="margin-top: 1rem;"><strong>Explore:</strong> Can be solo or partnered, with or without words</p>
+                        </div>
+                    </div>
+
+                    <!-- Station 6: Fashion & Adornment -->
+                    <div class="station-card" onclick="selectStation(this)">
+                        <div class="station-header">
+                            <div class="station-icon">♔</div>
+                            <div>
+                                <h3>Fashion & Adornment</h3>
+                                <p class="station-subtitle">"Wearable Expression"</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--slate); line-height: 1.6;">
+                            Create wearable art that moves through sensory, emotional, and symbolic dimensions.
+                        </p>
+                        <div class="station-questions">
+                            <strong>K/S Level:</strong> Wrap yourself in textures, explore weight and movement of fabrics, tactile adornment
+                            <br><strong>P/A Level:</strong> Design pieces that express your current emotional state, wear your mood
+                            <br><strong>C/Sy Level:</strong> Create symbolic jewelry, design costumes for different parts of self, meaningful adornment
+                            <p style="margin-top: 1rem;"><strong>Materials:</strong> Fabric, beads, wire, found objects, paper, natural materials</p>
+                        </div>
+                    </div>
+
+                    <!-- Station 7: Open Intuitive -->
+                    <div class="station-card" onclick="selectStation(this)">
+                        <div class="station-header">
+                            <div class="station-icon">∞</div>
+                            <div>
+                                <h3>Open Intuitive</h3>
+                                <p class="station-subtitle">"Your Way Through the Continuum"</p>
+                            </div>
+                        </div>
+                        <p style="color: var(--slate); line-height: 1.6;">
+                            Follow your intuition through any modality, moving freely between all levels of the continuum.
+                        </p>
+                        <div class="station-questions">
+                            <strong>This is your wild space.</strong> Combine modalities. Start at any level. 
+                            Flow between sensation, emotion, and meaning as your nervous system guides you.
+                            <p style="margin-top: 1rem;">Begin with what your body needs right now. Trust where it leads. 
+                            Notice the organic journey through the continuum.</p>
+                            <p style="margin-top: 1rem;"><strong>The Creative Level:</strong> When all dimensions work together—
+                            body wisdom, emotional truth, and meaningful insight integrated in one flow.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 1.5rem; background: linear-gradient(135deg, rgba(94, 234, 212, 0.1) 0%, rgba(135, 168, 120, 0.1) 100%); border-radius: 16px;">
+                    <p style="color: var(--deep-teal); font-weight: 600; margin-bottom: 0.5rem;">
+                        ◷ Trust Your Timing
+                    </p>
+                    <p style="color: var(--slate); line-height: 1.7;">
+                        Some people dive deep into one level. Others sample many. Both are valid. 
+                        Your nervous system knows what it needs. Follow your curiosity and your regulation needs.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Integration -->
+        <div class="page" id="page4">
+            <div class="card">
+                <h2>
+                    <div class="icon">★</div>
+                    Integration & Insight
+                </h2>
+                <p style="color: var(--slate); margin-bottom: 2rem; line-height: 1.7;">
+                    Now that you've explored different levels of creative expression, let's integrate what you discovered. 
+                    This reflection helps you understand your regulatory patterns and creative preferences.
+                </p>
+
+                <div class="reflection-prompts">
+                    <h3>⚘ Reflection Questions</h3>
+
+                    <div class="reflection-prompt">
+                        <h4>1. Which Modality & Level Felt Most Natural?</h4>
+                        <p>Did you gravitate toward visual arts, movement, music, writing? And within your chosen modalities, did you work more at the sensory, emotional, or symbolic level? What does this tell you about how you naturally process experience?</p>
+                        <textarea placeholder="Describe your experience..."></textarea>
+                    </div>
+
+                    <div class="reflection-prompt">
+                        <h4>2. Which Level Felt Most Challenging?</h4>
+                        <p>Across the modalities you explored, was it hard to stay at the body/sensory level? Difficult to access emotions? Challenging to make symbolic meaning? This is valuable information about your processing patterns.</p>
+                        <textarea placeholder="What was difficult and what might that mean..."></textarea>
+                    </div>
+
+                    <div class="reflection-prompt">
+                        <h4>3. Body Awareness & Regulation</h4>
+                        <p>How did your nervous system respond at different levels? Which helped you feel more grounded? More energized? More integrated?</p>
+                        <textarea placeholder="Notice what you felt in your body..."></textarea>
+                    </div>
+
+                    <div class="reflection-prompt">
+                        <h4>4. Insights About Your Process</h4>
+                        <p>What did you learn about yourself through this exploration? About how you regulate? About what you need when you're overwhelmed or shut down?</p>
+                        <textarea placeholder="What did you discover..."></textarea>
+                    </div>
+
+                    <div class="reflection-prompt">
+                        <h4>5. Moving Forward</h4>
+                        <p>Which level(s) might serve you in daily life? When you're stressed, might kinesthetic release help? When you're confused, might symbols clarify? How can you use this continuum as a regulation tool?</p>
+                        <textarea placeholder="How will you apply this..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <div class="icon">⊕</div>
+                    Key Takeaways
+                </h2>
+                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(253, 164, 175, 0.1) 0%, rgba(192, 132, 252, 0.1) 100%); border-radius: 16px;">
+                    <p style="color: var(--slate); line-height: 2.2; font-size: 1.05rem;">
+                        ★ There is no "best" level—each serves a purpose<br>
+                        ★ Your preferred level tells you about your regulatory patterns<br>
+                        ★ Flexibility between levels = resilience<br>
+                        ★ When overwhelmed, drop to sensation and movement<br>
+                        ★ When ready, move toward meaning and integration<br>
+                        ★ Process over product = nervous system healing<br>
+                        ★ Your body's wisdom guides your creative needs
+                    </p>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>
+                    <div class="icon">◯</div>
+                    Closing Circle
+                </h2>
+                <p style="color: var(--slate); line-height: 1.7; margin-bottom: 1.5rem;">
+                    If sharing in a group, consider these prompts:
+                </p>
+                <div class="concept-grid">
+                    <div class="concept-card">
+                        <h3>♡ One-Word Check-In</h3>
+                        <p>How do you feel right now in your body?</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>✧ Modality & Level You Lived In</h3>
+                        <p>Which creative modality did you spend the most time in? Which continuum level felt most alive?</p>
+                    </div>
+                    <div class="concept-card">
+                        <h3>⚘ One Discovery</h3>
+                        <p>Name one thing you learned about yourself today</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 2rem; padding: 2rem; background: linear-gradient(135deg, rgba(135, 168, 120, 0.1) 0%, rgba(94, 234, 212, 0.1) 100%); border-radius: 16px; text-align: center;">
+                    <p style="color: var(--deep-teal); font-weight: 600; font-size: 1.2rem; margin-bottom: 1rem;">
+                        Thank you for exploring the continuum. ∞
+                    </p>
+                    <p style="color: var(--slate); line-height: 1.7;">
+                        May you remember that you have many ways of processing experience. May you move flexibly 
+                        between sensation, emotion, and meaning. May you trust your body's knowing about what level 
+                        serves you in each moment.
+                    </p>
+                </div>
+            </div>
+
+            <div class="resource-box">
+                <h4>⊕ Further Resources</h4>
+                <ul>
+                    <li><strong>Books:</strong> "The Expressive Therapies Continuum" by Lisa Hinz</li>
+                    <li><strong>Books:</strong> "The Body Keeps the Score" by Bessel van der Kolk</li>
+                    <li><strong>Practice:</strong> Notice which levels you naturally use when stressed vs. calm</li>
+                    <li><strong>Integration:</strong> Keep art supplies for different levels accessible at home</li>
+                    <li><strong>Support:</strong> Work with an art therapist to deepen your continuum practice</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Page Navigation
+        function showPage(pageIndex) {
+            const pages = document.querySelectorAll('.page');
+            const pills = document.querySelectorAll('.nav-pill');
+            
+            pages.forEach((page, index) => {
+                page.classList.toggle('active', index === pageIndex);
+            });
+            
+            pills.forEach((pill, index) => {
+                pill.classList.toggle('active', index === pageIndex);
+            });
+
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Station Selection
+        function selectStation(stationCard) {
+            stationCard.classList.toggle('selected');
+        }
+
+        // Add staggered animation to cards on load
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.concept-card, .station-card');
+            cards.forEach((card, index) => {
+                card.style.animation = `fadeIn 0.6s ease ${index * 0.1}s both`;
+            });
+        });
+
+        // Smooth hover effects for concept cards
+        document.querySelectorAll('.concept-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.02)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Interactive continuum levels
+        document.querySelectorAll('.continuum-level').forEach(level => {
+            level.addEventListener('click', function() {
+                // Remove active from all
+                document.querySelectorAll('.continuum-level').forEach(l => {
+                    l.style.background = 'white';
+                    l.style.transform = 'scale(1)';
+                });
+                // Add active to clicked
+                this.style.background = 'linear-gradient(135deg, rgba(135, 168, 120, 0.2) 0%, rgba(94, 234, 212, 0.2) 100%)';
+                this.style.transform = 'scale(1.05)';
+            });
+        });
+    </script>
+</body>
+</html>
